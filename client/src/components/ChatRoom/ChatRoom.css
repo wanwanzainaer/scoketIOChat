@@ -1,7 +1,18 @@
 .bottomBox {
-  background-color: aqua;
+  background-color: transparent;
 }
 
 .chatroom {
   height: 90%;
+}
+
+.chatul li p {
+  font-size: 25px;
+}
+.chatul li p span {
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background-color: aqua;
+  border-color: beige;
 }

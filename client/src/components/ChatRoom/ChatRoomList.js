@@ -4,11 +4,13 @@ const ChatRoomList = ({ chatList }) => {
   const ListItems = chatList.map((msg, index) => {
     return (
       <li key={index}>
-        {msg.username}:{msg.text}
+        <p>
+          {msg.username}:<span>{msg.text}</span>
+        </p>
       </li>
     );
   });
-  const Items = <ul>{ListItems}</ul>;
+  const Items = <ul className="chatul">{ListItems}</ul>;
 
   return <>{Items}</>;
 };

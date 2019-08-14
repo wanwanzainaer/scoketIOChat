@@ -27,11 +27,12 @@ const App = () => {
     );
   } else {
     content = (
-      <div>
-        <h1>Welcome</h1>
+      <div className="container" style={{ width: "60%" }}>
+        <h4>Welcome</h4>
         <input
           value={state.handleInput}
           onChange={e => handleUserInput(e)}
+          placeholder="Please enter your name"
         />
         <button onClick={() => onClickButton()}>
           Connection for chat
