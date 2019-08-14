@@ -40,7 +40,7 @@ const App = () => {
     );
   }
 
-  return <div className="container">{content}</div>;
+  return <>{content}</>;
 };
 
 export default App;

@@ -1,19 +1,20 @@
 const express = require("express");
 const app = express();
-const SocketIO = require("socket.io");
+const socketio = require("socket.io");
 
 const expressServer = app.listen(5000, () => {
   console.log("success");
 });
 
-const io = new SocketIO(expressServer);
-
-io.on("connect", socket => {
+const io = new socketio(expressServer);
+io.on("connection", socket => {
+  //   console.log("some on connect");
   socket.emit("msgFromServer", {
     data: "successful connection"
   });
   socket.on("senNewMessageToServer", msg => {
-    console.log(msg);
-    socket.emit("receiveFromServer", { text: msg.text });
+    const username = socket.handshake.query.username;
+
+    io.emit("receiveFromServer", { username, text: msg.text });
   });
 });

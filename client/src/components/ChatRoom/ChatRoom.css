@@ -1,4 +1,7 @@
 .bottomBox {
-  position: sticky;
-  bottom: 0;
+  background-color: aqua;
+}
+
+.chatroom {
+  height: 90%;
 }

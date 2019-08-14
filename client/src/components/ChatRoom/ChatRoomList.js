@@ -1,21 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
-const ChatRoomList = ({ socket }) => {
-  const [state, setState] = useState({ chatRecode: [] });
-  socket.on("receiveFromServer", ({ text }) => {
-    let chatRecode = state.chatRecode;
-    chatRecode = [...chatRecode, text];
-    setState({ chatRecode });
+const ChatRoomList = ({ chatList }) => {
+  const ListItems = chatList.map((msg, index) => {
+    return (
+      <li key={index}>
+        {msg.username}:{msg.text}
+      </li>
+    );
   });
+  const Items = <ul>{ListItems}</ul>;
 
-  return (
-    <div>
-      <ul>
-        {state.chatRecode.map((text, index) => {
-          return <li key={index}>{text}</li>;
-        })}
-      </ul>
-    </div>
-  );
+  return <>{Items}</>;
 };
 export default ChatRoomList;

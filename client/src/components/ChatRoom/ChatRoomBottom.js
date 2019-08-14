@@ -10,11 +10,13 @@ const ChatRoomBottom = props => {
     setState({ text: "" });
   };
   return (
-    <div className="bottomBox">
-      <input onChange={e => inputHandler(e)} value={state.text} />
-      <button onClick={() => sendMessageToIO()}>Submit</button>
-      <button onClick={() => props.existChatRoom()}>Exit</button>
-    </div>
+    <footer className="page-footer bottomBox">
+      <div className="container">
+        <input onChange={e => inputHandler(e)} value={state.text} />
+        <button onClick={() => sendMessageToIO()}>Submit</button>
+        <button onClick={() => props.existChatRoom()}>Exit</button>
+      </div>
+    </footer>
   );
 };
 

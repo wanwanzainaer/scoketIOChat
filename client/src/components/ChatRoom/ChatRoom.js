@@ -1,23 +1,53 @@
-import React from "react";
-import socketIO from "socket.io-client";
+import React, { useState, useEffect, useCallback } from "react";
+import socketio from "socket.io-client";
+
 import "./ChatRoom.css";
+
 import ChatRoomList from "./ChatRoomList";
 import ChatRoomBottom from "./ChatRoomBottom";
 
 const ChatRoom = props => {
-  const socket = socketIO("http://localhost:5000", {
-    reconnection: true
-  });
+  const [io, setIO] = useState(null);
+  const [state, setState] = useState({ chatRecord: [] });
+  if (!io)
+    setIO(
+      socketio(`http://localhost:5000?username=${props.username}`),
+      {
+        reconnect: true
+        //   query: { username: props.username }
+      }
+    );
+
+  const initReciveMessage = useCallback(() => {
+    io.on("receiveFromServer", msg => {
+      const recordingChat = ({ username, text }) => {
+        let chat = state.chatRecord;
+        chat.push({ username, text });
+        setState({ chatRecord: chat });
+      };
+      recordingChat(msg);
+    });
+  }, [io, state.chatRecord]);
+
+  useEffect(() => {
+    if (io) {
+      console.log("connect success");
+      initReciveMessage();
+    }
+  }, [io, initReciveMessage]);
 
   return (
-    <div className="container">
-      <h1>Welcome {props.username} to the Chat room </h1>
-      <ChatRoomList socket={socket} />
+    <>
+      {" "}
+      <header>Welcome {props.username} to the Chat room </header>
+      <main className="container">
+        <ChatRoomList chatList={state.chatRecord} />
+      </main>
       <ChatRoomBottom
-        socket={socket}
+        socket={io}
         existChatRoom={props.existChatRoom}
       />
-    </div>
+    </>
   );
 };
 
