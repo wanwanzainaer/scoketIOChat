@@ -21,10 +21,10 @@ const ChatRoomBottom = props => {
           <div className="col s9">
             <input
               onChange={e => inputHandler(e)}
-              onKeyDown={e => handleKeyDown(e)}
               value={state.text}
               type="text"
               placeholder="Enter a message"
+              onKeyPress={e => handleKeyDown(e)}
             />
           </div>
           <div className="col s2">
