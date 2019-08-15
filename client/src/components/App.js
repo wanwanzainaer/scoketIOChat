@@ -27,16 +27,21 @@ const App = () => {
     );
   } else {
     content = (
-      <div className="container" style={{ width: "60%" }}>
-        <h4>Welcome</h4>
-        <input
-          value={state.handleInput}
-          onChange={e => handleUserInput(e)}
-          placeholder="Please enter your name"
-        />
-        <button onClick={() => onClickButton()}>
-          Connection for chat
-        </button>
+      <div className="container centercontainer">
+        <h3>Welcome the Socket Chat Room</h3>
+        <div>
+          <input
+            value={state.handleInput}
+            onChange={e => handleUserInput(e)}
+            placeholder="Please enter your name"
+          />
+          <button
+            className="waves-effect waves-light btn"
+            onClick={() => onClickButton()}
+          >
+            Connection for chat
+          </button>
+        </div>
       </div>
     );
   }

@@ -17,21 +17,24 @@ const ChatRoom = props => {
       }
     );
 
-  const initReciveMessage = useCallback(() => {
-    io.on("receiveFromServer", msg => {
-      const recordingChat = ({ username, text }) => {
-        let chat = state.chatRecord;
-        chat.push({ username, text });
-        setState({ chatRecord: chat });
-      };
-      recordingChat(msg);
-    });
-  }, [io]);
+  const initReciveMessage = useCallback(
+    io => {
+      io.on("receiveFromServer", msg => {
+        const recordingChat = ({ username, text }) => {
+          let chat = state.chatRecord;
+          chat.push({ username, text });
+          setState({ chatRecord: chat });
+        };
+        recordingChat(msg);
+      });
+    },
+    [state.chatRecord]
+  );
 
   useEffect(() => {
     if (io) {
       console.log("connect success");
-      initReciveMessage();
+      initReciveMessage(io);
     }
   }, [io, initReciveMessage]);
 

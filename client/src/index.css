@@ -12,3 +12,23 @@ body {
 main {
   flex: 10 auto;
 }
+
+.centercontainer {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.centercontainer h3 {
+  text-align: center;
+}
+.centercontainer input {
+  text-align: center;
+  width: 40%;
+}
+.centercontainer div {
+  text-align: center;
+}
