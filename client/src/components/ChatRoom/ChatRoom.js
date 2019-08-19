@@ -1,42 +1,43 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useReducer,
+  useCallback
+} from "react";
 import socketio from "socket.io-client";
 import "./ChatRoom.css";
-
+import reducer from "../../reducer/reducer";
 import ChatRoomList from "./ChatRoomList";
 import ChatRoomBottom from "./ChatRoomBottom";
 
+const initialState = [];
+
 const ChatRoom = props => {
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [io, setIO] = useState(null);
-  const [state, setState] = useState({ chatRecord: [] });
 
-  if (!io)
-    setIO(
-      socketio(`http://localhost:5000?username=${props.username}`),
-      {
-        reconnect: true
-      }
-    );
-
-  const initReciveMessage = useCallback(
-    io => {
-      io.on("receiveFromServer", msg => {
-        const recordingChat = ({ username, text }) => {
-          let chat = state.chatRecord;
-          chat.push({ username, text });
-          setState({ chatRecord: chat });
-        };
-        recordingChat(msg);
-      });
-    },
-    [state.chatRecord]
-  );
+  const initialMessageReciver = useCallback(io => {
+    io.on("receiveFromServer", msg => {
+      const recordingChat = ({ username, text }) => {
+        dispatch({ type: "msg", payload: { username, text } });
+      };
+      recordingChat(msg);
+    });
+  }, []);
 
   useEffect(() => {
     if (io) {
+      console.log(io);
+      initialMessageReciver(io);
       console.log("connect success");
-      initReciveMessage(io);
+    } else {
+      setIO(
+        socketio(`http://localhost:5000?username=${props.username}`, {
+          reconnect: true
+        })
+      );
     }
-  }, [io, initReciveMessage]);
+  }, [io, props.username, initialMessageReciver]);
 
   return (
     <>
@@ -45,7 +46,7 @@ const ChatRoom = props => {
         <h1>Welcome {props.username} to the Chat room</h1>
       </header>
       <main className="container">
-        <ChatRoomList chatList={state.chatRecord} />
+        <ChatRoomList chatList={state} />
       </main>
       <ChatRoomBottom
         socket={io}

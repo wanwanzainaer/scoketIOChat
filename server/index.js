@@ -17,4 +17,7 @@ io.on("connection", socket => {
 
     io.emit("receiveFromServer", { username, text: msg.text });
   });
+  socket.on("disconnect", msg => {
+    console.log("Some on exist the room");
+  });
 });

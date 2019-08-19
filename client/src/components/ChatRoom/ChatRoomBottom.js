@@ -14,6 +14,11 @@ const ChatRoomBottom = props => {
     props.socket.emit("senNewMessageToServer", { text: state.text });
     setState({ text: "" });
   };
+
+  const disconnectAndExistRoom = () => {
+    props.socket.close();
+    props.existChatRoom();
+  };
   return (
     <footer className="page-footer bottomBox">
       <div className="container">
@@ -38,7 +43,7 @@ const ChatRoomBottom = props => {
           <div className="col s1">
             <button
               className="waves-effect waves-light btn red"
-              onClick={() => props.existChatRoom()}
+              onClick={disconnectAndExistRoom}
             >
               Exit
             </button>
