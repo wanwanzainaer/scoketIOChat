@@ -1,0 +1,41 @@
+.entrance__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80%;
+  width: 75%;
+  padding: 0 auto;
+  text-align: center;
+
+  &-connectbox {
+    position: absolute;
+    display: inline-block;
+    background-color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 30%;
+    width: 50%;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+    border-radius: 3px;
+    // // transition: all 0.2s;
+    // // animation: moveInBottom 0.5s ease-out 0.75;
+    // animation-fill-mode: backwards;
+    &-input {
+      display: block;
+      margin: 1rem auto 2rem;
+      width: 80%;
+      font-size: 2rem;
+      height: 5rem;
+      text-align: center;
+      outline: 0;
+      border-width: 0 0 0.2rem;
+      border-color: blue;
+
+      &:focus {
+        border-color: red;
+      }
+    }
+  }
+}

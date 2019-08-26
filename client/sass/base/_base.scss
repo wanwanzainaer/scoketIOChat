@@ -1,0 +1,15 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html {
+  /*help user chose thier own font size with thier browser here is broswer default 16px 10px* what 1 rem is*/
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+}
