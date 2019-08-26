@@ -35,10 +35,10 @@ body {
 @keyframes moveInBottom {
   0% {
     opacity: 0;
-    transform: translateY(3rem); }
+    transform: translate(-50%) translateY(3rem); }
   100% {
     opacity: 1;
-    transform: translate(0); } }
+    transform: translate(-50%) translateY(-50%); } }
 
 body {
   font-family: "Lato", sans-serif;
@@ -115,19 +115,21 @@ body {
   transform: translate(-50%, -50%);
   height: 80%;
   width: 75%;
-  padding: 0 auto;
-  text-align: center; }
+  padding: 0 auto; }
   .entrance__container-connectbox {
     position: absolute;
     display: inline-block;
-    background-color: #fff;
+    height: 30%;
+    width: 50%;
+    text-align: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 30%;
-    width: 50%;
+    background-color: #fff;
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
-    border-radius: 3px; }
+    border-radius: 3px;
+    animation: moveInBottom 0.75s ease-out 1s;
+    animation-fill-mode: backwards; }
     .entrance__container-connectbox-input {
       display: block;
       margin: 1rem auto 2rem;
